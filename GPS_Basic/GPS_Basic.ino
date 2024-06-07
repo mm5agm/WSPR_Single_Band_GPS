@@ -28,6 +28,9 @@ TinyGPSPlus gps;
 #define TX_PIN 17                      // ESP32 Pin connected to the RX of the GPS module
 static const uint32_t GPSBaud = 9600;  // set to your GPS baud rate. Some are 4800, some are 9600
 
+/******************************[ smartDelay ] ************************************************
+*** allow the gps to be updated while having a delay in the program                        ***    
+**********************************************************************************************/     
 static void smartDelay(unsigned long ms) {
   unsigned long start = millis();
   do {
@@ -36,23 +39,22 @@ static void smartDelay(unsigned long ms) {
   } while (millis() - start < ms);
 }
 
+/************************************[ initialiseGPS ] **************************************
+***  initiaalise the GPS module and wait till a valid set of data is received             ***
+*********************************************************************************************/
 void initialiseGPS() {
   gpsPort.begin(GPSBaud, SERIAL_8N1, RX_PIN, TX_PIN);
+  Serial.println("Waiting for GPS to find satellites");
   gps.encode(gpsPort.read());
-  while (!gps.time.isUpdated()) {  // will stay in this while loop until the time is updated from the gps module
+   while (!gps.location.isValid()) {
     gps.encode(gpsPort.read());
     Serial.print("*");
     smartDelay(100);
   }
 }
-void setup() {
-  Serial.begin(115200);
-  delay(1000);  // give the port time to open
-  initialiseGPS();
-  Serial.print("Got Fix");  // if we get to this line the GPS module is communicating with the ESP32
-  Serial.print("Number Of Satellites =");
-  Serial.println(gps.satellites.value());
-}
+/*****************************[ serialPrintTime ]******************************************
+*** show the time on the serial monitor                                                 *** 
+*********************************************************************************************/
 void serialPrintTime() {
   Serial.print(gps.time.hour());
   Serial.print(":");
@@ -61,6 +63,9 @@ void serialPrintTime() {
   Serial.print(gps.time.second());
   Serial.println();
 }
+/*****************************[ serialPrintDate ]******************************************
+*** show the date on the serial monitor                                                 *** 
+*******************************************************************************************/
 void serialPrintDate() {
   Serial.print(" Year=");
   Serial.print(gps.date.year());
@@ -69,6 +74,18 @@ void serialPrintDate() {
   Serial.print(" Day=");
   Serial.println(gps.date.day());
 }
+/*******************************************************************************************/
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);  // give the port time to open
+  initialiseGPS();
+  Serial.println();
+  Serial.print("Got Fix. Number Of Satellites = ");  // if we get to this line the GPS module is communicating with the ESP32
+  Serial.println(gps.satellites.value());
+}
+/*******************************************************************************************/
+
 void loop() {
   while (gpsPort.available() > 0)
     gps.encode(gpsPort.read());
