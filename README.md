@@ -4,8 +4,9 @@
 
 
 # WSPR_Single_Band_GPS
-The ESP32 comes in many varieties. Some give 5v at the Vin pin some a bit less than 3.3
-ESP32 marked "ESP32 DEVKITV1" Gives the 5V I required for my GPS module but another ESP32 marked "ESP32_DEVKIkc_V4" doesn't. The ESP32_DEVKIkc_V4 also lacks an LED apart from the power one.
+The ESP32 comes in many varieties. Some give 5v at the Vin pin some a bit less than 3.3V
+
+ESP32 marked "ESP32 DEVKITV1" Gives the 5V I required for my GPS module but another ESP32 marked "ESP32_DEVKIkc_V4" doesn't. The ESP32_DEVKIkc_V4 also lacks an LED apart from the power one. I use the "ESP32 DEVKITV1" and in the Arduino IDE I select "DOIT ESP32 DEVKIT V1" as the board.
 
 This is a GPS version of my single band wspr beacon. No need for internet or NTP servers.
 
