@@ -1,4 +1,11 @@
+
+
+![ESP32_Single_Band_WSPR_GPS_bb](https://github.com/mm5agm/WSPR_Single_Band_GPS/assets/26571503/f35b96cd-5774-45d3-bf09-22ae6d47d925)
+
+
 # WSPR_Single_Band_GPS
+The ESP32 comes in many varieties. Some give 5v at the Vin pin some a bit less than 3.3
+ESP32 marked "ESP32 DEVKITV1" Gives the 5V I required for my GPS module but another ESP32 marked "ESP32_DEVKIkc_V4" doesn't. The ESP32_DEVKIkc_V4 also lacks an LED apart from the power one.
 
 This is a GPS version of my single band wspr beacon. No need for internet or NTP servers.
 
@@ -7,7 +14,7 @@ I've still to add the final program - possibly later this week
  
  1. In the Arduino IDE go to “File/Preferences” and fill in the “Additional boards manager URLs” with https://espressif.github.io/arduino-esp32/package_esp32_index.json
 
-2. Add ESP32 - Get time from GPS - GPS_Basic.ino 
+2. Get time from GPS - GPS_Basic.ino Connect ESP32 TX to GPS RX and ESP32 RX to GPS TX
 
 3. Add OLED display, Scan I2C to get OLED address - I didn't need to use the OLED address
 
