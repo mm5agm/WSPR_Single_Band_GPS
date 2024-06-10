@@ -42,13 +42,21 @@ static void smartDelay(unsigned long ms) {
 ***  initialise the GPS module and wait till a valid location is received                 ***
 *********************************************************************************************/
 void initialiseGPS() {
+  boolean validData = false;  // the isValid flag only indicates a valid sentence was received, it doesn't mean the data is valid
+  int attempts = 0;
   gpsPort.begin(GPSBaud, SERIAL_8N1, RX_PIN, TX_PIN);
   Serial.println("Waiting for GPS to find satellites");
   gps.encode(gpsPort.read());
-  while (!gps.location.isValid()) {
+  validData = ((gps.date.day() > 0) && (gps.date.month() > 0) && (gps.date.year() > 0));  //apparently these all come back as zero if no fix but gps.date.isValid() is true
+  while (!validData) {
     gps.encode(gpsPort.read());
-    Serial.print("*");
-    smartDelay(300);
+    validData = ((gps.date.day() > 0) && (gps.date.month() > 0) && (gps.date.year() > 0));
+    if (attempts > 60) {
+      Serial.println();
+    } else {
+      Serial.print("*");
+    }
+    smartDelay(200);
   }
 }
 /*****************************[ serialPrintTime ]******************************************
