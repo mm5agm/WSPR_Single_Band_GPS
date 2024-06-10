@@ -10,6 +10,8 @@ ESP32 marked "ESP32 DEVKITV1" Gives the 5V I required for my GPS module but anot
 
 This is a GPS version of my single band wspr beacon. No need for internet or NTP servers.
 
+I've used the TinyGPSPlus library. In this library, isValid, doesn't mean that the data is valid, it means that the sentence received was valid. In the case of the date, a valid sentence could contain month, day, and year all equal to 0, and the isValid flag will be true.
+
 I've still to add the final program - possibly later this week
  A Single Band WSPR beacon using GPS to sync time
  
