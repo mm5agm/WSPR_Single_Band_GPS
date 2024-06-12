@@ -12,14 +12,12 @@ This is a GPS version of my single band wspr beacon. No need for internet or NTP
 
 I've used the TinyGPSPlus library. In this library, isValid, doesn't mean that the data is valid, it means that the sentence received was valid. In the case of the date, a valid sentence could contain month, day, and year all equal to 0, and the isValid flag will be true.
 
-I've still to add the final program - possibly later this week
- A Single Band WSPR beacon using GPS to sync time
- 
+
  1. In the Arduino IDE go to “File/Preferences” and fill in the “Additional boards manager URLs” with https://espressif.github.io/arduino-esp32/package_esp32_index.json
 
-2. Get time from GPS - GPS_Basic.ino Connect ESP32 TX to GPS RX and ESP32 RX to GPS TX
+2. Get time from GPS - Load and compile GPS_Basic.ino in Arduino IDE. Connect ESP32 TX to GPS RX and ESP32 RX to GPS TX
 
-3. Add OLED display, Scan I2C to get OLED address - I didn't need to use the OLED address
+3. Add OLED display, Scan I2C to get OLED address, use I2C_Scanner.ino - I didn't need to use the OLED address
 
 4. Display information on OLED - GPS_Time_RTC_OLED.ino
 
@@ -27,4 +25,8 @@ I've still to add the final program - possibly later this week
 
 6. Add low pass filter for the band you are using.
 
-I'll add the final program later this week
+7. Open WSPR_Single_Band_GPS.ino in the Arduino IDE.
+
+8. Change the callsign (about line 89) and, if you don't want 20mtrs, comment out the 20mtrs (around line 133) and uncomment the frequency you want.
+   
+10. Compile and Load WSPR_Single_Band_GPS.ino into your ESP32 after changing the callsign to yours.
