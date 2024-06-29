@@ -3,6 +3,8 @@
 If your new to the Arduino and ESP32 please read the readme.md in my WSPR repository for a comprehensive setup guide.
 Instead of loading NTP_Basis.ino you should load GPS_Basic.ino, then GPS_Time_Location_OLED.ino, then WSPR_Single_Band_GPS.ino
 
+My code uses Serial2, marked RX2 and TX2 on some boards to connect the GPS receiver to the ESP32.
+
 ![ESP32_Single_Band_WSPR_GPS_bb](https://github.com/mm5agm/WSPR_Single_Band_GPS/assets/26571503/f35b96cd-5774-45d3-bf09-22ae6d47d925)
 
 The ESP32 comes in many varieties. Some give 5v at the Vin pin some a bit less than 3.3V
