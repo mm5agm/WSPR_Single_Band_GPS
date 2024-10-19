@@ -1,6 +1,6 @@
 # WSPR_Single_Band_GPS
 
-If your new to the Arduino and ESP32 please read the readme.md in my WSPR repository for a comprehensive setup guide.
+If you are new to the Arduino and ESP32 please read the readme.md in my WSPR repository for a comprehensive setup guide.
 Instead of loading NTP_Basis.ino you should load GPS_Basic.ino, then GPS_Time_Location_OLED.ino, then WSPR_Single_Band_GPS.ino
 
 My code uses Serial2, marked RX2 and TX2 on some boards to connect the GPS receiver to the ESP32.
